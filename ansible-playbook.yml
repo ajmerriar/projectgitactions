@@ -27,7 +27,7 @@
 
     - name: Start Flask app
       command: >
-        /usr/bin/python3 /home/azureuser/app.py
+        python3 /home/azureuser/app.py
       async: 1000
       poll: 0
 
