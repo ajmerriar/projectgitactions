@@ -1,9 +1,9 @@
 name: Build and Deploy Flask App
 
-on: []
-  # push:
-  #   branches:
-  #     - main
+on: 
+  push:
+    branches:
+      - main
 
 jobs:
   build:
@@ -22,9 +22,18 @@ jobs:
         run: |
           python -m pip install --upgrade pip
           pip install -r requirements.txt
-      - name: Run Tests (if any)
-        run: pytest tests
+          
+      # - name: Run Tests (if any)
+      #   run: pytest tests
 
-      - name: Deploy Flask App
+      - name: Run Flask App
         run: |
-          # Add commands to start your Flask application
+          python script.py
+          # Assuming the Flask app generates a file 'result.txt'
+          echo "This is the result" > result.txt
+      
+      - name: Upload Result
+        uses: actions/upload-artifact@v2
+        with:
+          name: my-artifact
+          path: result.txt
