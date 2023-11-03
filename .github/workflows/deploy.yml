@@ -1,9 +1,10 @@
 name: Test Ansible Playbook
 
-on: []
-  # push:
-  #   branches:
-  #     - master
+on: 
+  workflow_run:
+    workflows: ["Build and Deploy Flask App"] # This specifies the dependency on the Build Workflow
+    types:
+      - completed
 
 jobs:
   deploy:
