@@ -5,7 +5,7 @@ from keras.models import load_model
 
 app = Flask(__name__)
 
-model = load_model('/app/data/model1_catsVSdogs_10epoch.h5')
+model = load_model('../../model1_catsVSdogs_10epoch.h5')
 
 classes = {
     0: 'its a cat',
