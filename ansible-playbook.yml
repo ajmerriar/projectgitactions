@@ -18,6 +18,7 @@
           - pillow
           - numpy
           - keras
+          - tensorflow
 
     - name: Copy Flask app files to the target
       copy:
@@ -27,7 +28,7 @@
 
     - name: Start Flask app
       command: >
-        python3 /home/azureuser/app.py
+        python3 /home/azureuser/script.py
       async: 1000
       poll: 0
 
