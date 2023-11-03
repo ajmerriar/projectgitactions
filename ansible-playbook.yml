@@ -7,7 +7,7 @@
     - name: Installing Docker and Python
       apt:
         name: 
-          - docker
+          - docker.io
         state: present
 
     - name: Start Docker service
