@@ -1,0 +1,32 @@
+---
+- name: Deploy Flask App
+  hosts: all
+  become: yes
+
+  tasks:
+    - name: Update package cache and install Python
+      apt:
+        name: 
+          - python3
+          - python3-pip
+        state: present
+
+    - name: Install required Python packages
+      pip:
+        name:
+          - flask
+          - pillow
+          - numpy
+          - keras
+
+    - name: Copy Flask app files to the target
+      copy:
+        src: script.py
+        dest: /home/azureuser
+        mode: '0755'
+
+    - name: Start Flask app
+      command: >
+        /usr/bin/python3 /home/azureuser/app.py
+      async: 1000
+      poll: 0
