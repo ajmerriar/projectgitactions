@@ -4,31 +4,36 @@
   become: yes
 
   tasks:
-    - name: Update package cache and install Python
+    - name: Installing Docker and Python
       apt:
         name: 
-          - python3
-          - python3-pip
+          - docker
         state: present
 
-    - name: Install required Python packages
-      pip:
-        name:
-          - flask
-          - pillow
-          - numpy
-          - keras
-          - tensorflow
+    - name: Start Docker service
+      service:
+        name: docker
+        state: started
+        enabled: yes
 
-    - name: Copy Flask app files to the target
-      copy:
-        src: script.py
-        dest: /home/azureuser
-        mode: '0755'
+    - name: Pull default Docker image
+      community.docker.docker_image:
+        name: "ajmer1705/gitjava:latest"
+        source: pull
 
-    - name: Start Flask app
-      command: >
-        python3 script.py
-      async: 1000
-      poll: 0
+    - name: Create mySQL Docker container
+      community.docker.docker_container:
+        name: mysqldb
+        image: "ajmer1705/gitdatabase:latest"
+        state: started
+        ports:
+          - "3306:3306"
+        
+    - name: Create Web Java Docker container
+      community.docker.docker_container:
+        name: onlinebookstore
+        image: "ajmer1705/gitjava:latest"
+        state: started
+        ports:
+          - "80:8080"
 
