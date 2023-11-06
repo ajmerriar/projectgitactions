@@ -22,13 +22,11 @@ jobs:
       - name: Build the docker image
         run: |
           docker build . -t ajmer1705/gitjava:latest -f Docker-files/app/Dockerfile
-          docker build . -t ajmer1705/gitdatabase:latest -f Docker-files/db/Dockerfile
+
           
       - name: push Docker image
         run: |
           docker push ajmer1705/gitjava:latest
-          docker push ajmer1705/gitdatabase:latest
-
 
 
 
