@@ -1,10 +1,10 @@
 ---
-- name: Deploy Flask App
+- name: Deploy Java App
   hosts: all
   become: yes
 
   tasks:
-    - name: Installing Docker and Python
+    - name: Installing Docker 
       apt:
         name: 
           - docker.io
@@ -21,13 +21,6 @@
         name: "ajmer1705/gitjava:latest"
         source: pull
 
-    - name: Create mySQL Docker container
-      community.docker.docker_container:
-        name: mysqldb
-        image: "ajmer1705/gitdatabase:latest"
-        state: started
-        ports:
-          - "3306:3306"
         
     - name: Create Web Java Docker container
       community.docker.docker_container:
