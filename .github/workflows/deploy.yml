@@ -24,12 +24,12 @@ jobs:
           
       - name: Install Ansible
         run: |
-          sudo apt-add-repository ppa:ansible/ansible
-          sudo apt update && sudo apt upgrade
-          sudo apt install ansible
-          sudo chmod 777 /etc/ansible/ansible.cfg
-          sudo cat ansible.cfg > /etc/ansible/ansible.cfg
-          cat /etc/ansible/ansible.cfg
+          sudo apt update
+          sudo apt install software-properties-common
+          sudo add-apt-repository --yes --update ppa:ansible/ansible
+          sudo apt remove ansible
+          sudo apt install ansible-core
+
 
           
       - name: Deploy with Ansible
