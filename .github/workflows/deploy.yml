@@ -24,11 +24,13 @@ jobs:
           
       - name: Install Ansible
         run: |
-          sudo apt-get purge ansible
-          sudo apt-get autoremove
           sudo apt-add-repository ppa:ansible/ansible
-          sudo apt update
+          sudo apt update && sudo apt upgrade
           sudo apt install ansible
+          sudo chmod 777 /etc/ansible/ansible.cfg
+          sudo cat ansible.cfg > /etc/ansible/ansible.cfg
+          cat /etc/ansible/ansible.cfg
+
           
       - name: Deploy with Ansible
         run: ansible-playbook -i ip.txt -u "azureuser" --private-key ~/.ssh/id_rsa ansible-playbook.yml
