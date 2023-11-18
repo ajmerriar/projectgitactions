@@ -1,7 +1,7 @@
 From openjdk:11 AS BUILD_IMAGE
 RUN apt update && apt install maven -y
 COPY ../.. .
-RUN cd projectgitactions && git checkout master && mvn clean install
+RUN cd projectgitactions && mvn clean install
 
 From tomcat:9-jre11
 
